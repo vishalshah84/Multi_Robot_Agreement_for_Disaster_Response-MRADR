@@ -10,7 +10,7 @@ from animation import (
     make_phase2_video_from_logs,
     make_combined_video_from_logs,
 )
-
+from utils import run_phase2_analysis
 
 def main():
     parser = argparse.ArgumentParser()
@@ -117,6 +117,21 @@ def main():
         result=res2,
         filename=args.phase2_excel,
     )
+
+
+    # ---- Phase-2 analysis plots (NEW) ----
+    run_phase2_analysis(
+        world_cfg=world_cfg,
+        robot_cfg=r_cfg,
+        phase_cfg=p2_cfg,
+        victims=victims,
+        false_sites=false_sites,
+        robots=robots_phase2,      # or robots, depending on your mode
+        phase2_result=res2,
+        out_dir="phase_2_analysis_plots",
+        log_csv="phase2_log.csv",
+    )
+
 
     # If we used a separate robots_phase2 list (reset mode),
     # copy its phase-2 histories back into 'robots'
